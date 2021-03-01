@@ -1,0 +1,25 @@
+# serverless.yml
+
+service: apollo-lambda
+useDotenv: true
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-central-1
+  profile: ammely-staging
+functions:
+  graphql:
+    handler: src/index.graphqlHandler
+    events:
+    - http:
+        path: graphql
+        method: post
+        cors: true
+    - http:
+        path: graphql
+        method: get
+        cors: true
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
+  - serverless-dotenv-plugin
